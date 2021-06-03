@@ -142,17 +142,17 @@ class Prestashop15 extends Profile
      */
     public function getAttributedProductsSelect()
     {
-        return '
+        return "
             SELECT
             DISTINCT p.id_product AS productID
 
-            FROM ps_product p
+            FROM {$this->quoteTable('ps_product', 'p')}
 
-            LEFT JOIN ps_product_attribute a
+            LEFT JOIN {$this->quoteTable('ps_product_attribute', 'a')}
             ON p.id_product =a.id_product
 
             WHERE a.id_product IS NOT NULL
-        ';
+        ";
     }
 
     /**
@@ -171,7 +171,7 @@ class Prestashop15 extends Profile
             al.name                     as option_name,
             pa.price                    as price
 
-            FROM ps_product p
+            FROM {$this->quoteTable('ps_product', 'p')}
 
             -- join products attributes
             LEFT JOIN  {$this->quoteTable('product_attribute', 'pa')}
